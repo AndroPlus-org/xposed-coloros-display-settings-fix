@@ -1,6 +1,6 @@
 # xposed-coloros-display-settings-fix
 
-ColorOS で権限監視（権限の傍受）をオフにしていると、設定の「ディスプレイと明るさ」が AOSP 風の画面になってしまう問題を、権限監視はオフのまま直す Xposed / LSPosed モジュール。
+ColorOS で「システム最適化を無効にする」（認可の監視を無効化）をオフにしていると、設定の「ディスプレイと明るさ」が AOSP 風の画面になってしまう問題を、権限監視はオフのまま直す Xposed / LSPosed モジュール。
 
 ## 原因
 `com.oplus.settings.feature.display.DisplaySettingsFragment#onCreate` は、`OplusActivityManager#isPermissionInterceptEnabled()` が false のとき AOSP の `com.android.settings.DisplaySettings` をコンテンツ領域に重ねて表示する（CTS 向けの挙動と思われる）。
