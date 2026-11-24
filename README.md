@@ -1,12 +1,12 @@
 # xposed-coloros-display-settings-fix
 
-ColorOS で「システム最適化を無効にする」（認可の監視を無効化）をオフにしていると、設定の「ディスプレイと明るさ」が AOSP 風の画面になってしまう問題を、権限監視はオフのまま直す Xposed / LSPosed モジュール。
+ColorOS で「システム最適化を無効にする」（認可の監視を無効化）をオンにしていると、設定の「ディスプレイと明るさ」が AOSP 風の画面になってしまう問題をシステム最適化は無効のまま直す Xposed / LSPosed モジュール。
 
 ## 原因
 `com.oplus.settings.feature.display.DisplaySettingsFragment#onCreate` は、`OplusActivityManager#isPermissionInterceptEnabled()` が false のとき AOSP の `com.android.settings.DisplaySettings` をコンテンツ領域に重ねて表示する（CTS 向けの挙動と思われる）。
 
 ## 仕組み
-`DisplaySettingsFragment#showFragment(Fragment, int)` をフックし、渡されたのが `com.android.settings.DisplaySettings` のときだけ表示を抑止する。`isPermissionMonitorEnable()` 自体は変更しないため、他の画面での権限監視オフの挙動は変わらない。
+`DisplaySettingsFragment#showFragment(Fragment, int)` をフックし、渡されたのが `com.android.settings.DisplaySettings` のときだけ表示を抑止する。`isPermissionMonitorEnable()` 自体は変更しないため、他の画面でのシステム最適化無効の挙動は変わらない。
 
 ## 使い方
 1. APK をインストールし、LSPosed / Vector でモジュールを有効化
